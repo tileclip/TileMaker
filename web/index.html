@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    input.num {
+      width: 2em;
+    }
+    table.compact td {
+      padding: 0px 5px;
+      text-align: right;
+    }
+    div.row.no-margin {
+      margin: 0px 0px 0px 0px;
+    }
+    span.poor {
+      color: #E9692C;
+    }
+    span.fair {
+      color: #ffcc4d;
+    }
+    span.good {
+      color: #D0FF14;
+    }
+    img.smiley {
+      vertical-align: middle;
+    }
+    svg#grid {
+      margin-left: 7%;
+    }
+    
+  </style>
+  
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+  
+  <script src="app.js"></script>
+  <script src="mvc.js"></script>
+  <script>
+  'use strict';
+    window.addEventListener("load", function onload(e) {
+      var app = window.app;
+      app.init();
+    });
+  </script>
+</head>
+<body>
+
+<div class="row valign-wrapper" id="panel">
+  <div class="col s2">
+  
+    <div class="file-field input-field valign">
+      <div class="btn">
+        <span><i class="material-icons left">image</i>Open</span>
+        <input type="file" id="file_input">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+  </div>
+  
+  <div class="col s3">
+    <div class="row valign-wrapper no-margin">
+      <div class="col s4 input-field">
+        <input id="wide" type="number" class="validate num" value="1">
+        <label class="active" for="wide" id="wide_label">Wide:</label>
+      </div>
+      <div class="col s4 valign">
+        &#xD7;
+      </div>
+      <div class="col s4 input-field">
+        <input id="high" type="number" class="validate num" value="1">
+        <label class="active" for="high" id="high_label">High:</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12 center">
+        <div class="switch">
+          <label>
+            Unlock
+            <input id="lock" type="checkbox">
+            <span class="lever"></span>
+            Lock
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="col s2">
+    <table class="compact">
+      <tr><td>L-Clips:</td><td><span id="l_clips">4</span></td></tr>
+      <tr><td>T-Clips:</td><td><span id="t_clips">0</span></td></tr>
+      <tr><td>X-Clips:</td><td><span id="x_clips">0</span></td></tr>
+    </table>
+  </div>
+  
+  <div class="col s2">
+    <div class="row no-margin">
+      <div class="col s12 input-field">
+        <input id="job" type="text" class="validate">
+        <label class="active" for="job">Job #:</label>
+      </div>
+    </div>
+    <div class="row no-margin">
+      <div class="col s12">
+        <img id="face" src="poor_res.svg" alt="Poor Resolution" width="16" height="16" class="smiley"> <span id="warning">Res: <span id="resolution"></span> px/inch</span>
+      </div>
+    </div>
+    <div class="row no-margin">
+      <div class="col s12">
+        <a id="pdf" class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>PDF</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<svg id="grid" height="1200" width="1400">
+  <image transform="translate(0, 0)" id="svg_img" x="0" y="0" width="200" height="200" xlink:href="test.jpg" />
+  <path id="static_grid" d="
+    M 10 10 l 0 500
+    M 110 10 l 0 500
+    M 210 10 l 0 500
+    M 310 10 l 0 500
+    M 410 10 l 0 500
+    M 510 10 l 0 500
+    M 610 10 l 0 500
+    M 710 10 l 0 500
+    M 810 10 l 0 500
+    
+    M 10 10 l 800 0
+    M 10 110 l 800 0
+    M 10 210 l 800 0
+    M 10 310 l 800 0
+    M 10 410 l 800 0
+    M 10 510 l 800 0
+
+    " stroke="black"
+  stroke-width="1" fill="none" />
+    <path id="used_path" d="
+    M 10 10 l 0 100 l 100 0 l 0 -100 l -100 0
+    " stroke="white"
+  stroke-width="2" fill="none" />
+  <g id="drag_button" transform="translate(0, 0)">
+    <rect width="48" height="48" y="-12" x="-12" opacity=".1" />
+    <g transform="rotate(90, 12, 12)">
+      <rect width="24" height="24" stroke="blue" fill="purple" />
+      <path stroke="#66FF00" fill="#66FF00" d="M10,21V19H6.41L10.91,14.5L9.5,13.09L5,17.59V14H3V21H10M14.5,10.91L19,6.41V10H21V3H14V5H17.59L13.09,9.5L14.5,10.91Z" />
+    </g>
+  </g>
+</svg>
+<script src="https://cdn.jsdelivr.net/riot/2.3/riot.min.js"></script>
+<script src="jspdf.min.js"></script>
+</body>
+</html>
