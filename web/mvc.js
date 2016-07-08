@@ -417,10 +417,10 @@ var control = (function() {
     var deltaX = e.pageX - mouseX;
     var deltaY = e.pageY - mouseY;
     if (deltaX * deltaX + deltaY * deltaY >= MIN_DRAG_DELTA_SQUARED) {
-      var rect = grid.getBoundingClientRect();
-      var x = event.clientX - rect.left;
-      var y = event.clientY - rect.top;
-      if (scalingFlag) app.trigger('scale', e.pageX-grid.offsetLeft-BUTTON_SIZE/2, e.pageY-grid.offsetTop-BUTTON_SIZE/2);
+      if (scalingFlag) {
+        var rect = grid.getBoundingClientRect();
+        app.trigger('scale', e.pageX-rect.left-BUTTON_SIZE/2, e.pageY-rect.top-BUTTON_SIZE/2);
+      }
       else app.trigger('scroll', deltaX, deltaY);
       mouseX = e.pageX;
       mouseY = e.pageY;
